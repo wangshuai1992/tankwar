@@ -7,7 +7,9 @@
  */
 package com.wangshuai.tankwar.utils;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 
 /**
  *
@@ -21,8 +23,26 @@ public class ResourceHelper {
 
     }
 
+    /**
+     * 根据classpath相对路径获取输入流
+     * @param url classpath相对路径
+     * @return
+     */
     public static InputStream getResourceInputStream(String url) {
         return ResourceHelper.class.getClassLoader().getResourceAsStream(url);
+    }
+
+    /**
+     * 获取当前classpath在操作系统的绝对路径
+     * @return
+     * @throws IOException
+     */
+    public static String getClassPath() throws IOException {
+        URL url = ResourceHelper.class.getClassLoader().getResource("");
+        if(null == url) {
+            return "";
+        }
+        return url.getPath();
     }
 
 }
